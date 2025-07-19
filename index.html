@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
+      position: relative;
     }
 
     .box {
@@ -70,27 +71,42 @@
       font-weight: bold;
     }
 
-    .support-section {
-      margin-top: 30px;
+    .contact-section {
+      text-align: center;
+      margin-top: 20px;
     }
 
-    .support-section p {
-      margin-bottom: 10px;
+    .contact-section p {
+      margin: 10px 0 5px;
+      font-weight: 500;
     }
 
-    .support-section img {
-      margin-top: 10px;
+    .contact-section a button {
+      background-color: #00bfff;
+    }
+
+    .support-icon {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 999;
+    }
+
+    .support-icon img {
+      width: 60px;
+      height: auto;
     }
   </style>
 </head>
 <body>
+
   <div class="box">
     <h2>Make UPI Payment</h2>
     <p style="color: red; font-weight: bold;">Time Left: 15:00</p>
 
-    <img class="qr-img" src="https://i.ibb.co/6RjNcdJh/Screenshot-20250719-153539.jpg" alt="QR Code">
+    <img class="qr-img" src="https://i.ibb.co/6RjNcdJ/Screenshot-20250719-153539.jpg" alt="QR Code">
 
-    <p class="upi-id">UPI ID: <br><span>BHARATPE.8F0E0L7R6Y68168@fbpe</span></p>
+    <p class="upi-id">UPI ID:<br><span>BHARATPE.8F0E0L7R6Y68168@fbpe</span></p>
 
     <form id="paymentForm">
       <input type="text" id="utr" placeholder="Enter UTR" required><br>
@@ -104,15 +120,19 @@
       Your payment will be added within 1 hour.<br>
       For urgent issues, contact support.
     </div>
+  </div>
 
-    <div class="support-section">
-      <p>Want to make your payment page?</p>
-      <a href="https://t.me/dllsmm" target="_blank">
-        <button style="background-color: #00bfff;">Contact</button>
-      </a>
-      <br><br>
-      <img src="https://i.ibb.co/gGZCjFM/help-desk.png" alt="Support" width="80" />
-    </div>
+  <div class="contact-section">
+    <p>Want to make your payment page?</p>
+    <a href="https://t.me/dllsmm" target="_blank">
+      <button>Contact</button>
+    </a>
+  </div>
+
+  <div class="support-icon">
+    <a href="https://t.me/dllsmm" target="_blank">
+      <img src="https://i.ibb.co/ZGJBPfT/support-icon.png" alt="Support">
+    </a>
   </div>
 
   <script>
