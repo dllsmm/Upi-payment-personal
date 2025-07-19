@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+}
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  color: #333;
+}
+.timer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 15px;
+}
+img.qr {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.upi-id {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.payment-icons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.payment-icons img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #45a049;
+}
+.footer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+}
+.footer a.contact-button {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 8px 16px;
+  background-color: #00bfff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.support-icon {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 55px;
+  height: 55px;
+  z-index: 999;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+  .timer {
+    font-size: 1rem;
+  }
+  button {
+    width: 100%;
+  }
+  .payment-icons img {
+    width: 30px;
+    height: 30px;
+  }
+}
