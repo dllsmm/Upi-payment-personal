@@ -2,144 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Make UPI Payment</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 400px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .container img.qr {
-      width: 220px;
-      margin-bottom: 15px;
-    }
-
-    h2 {
-      margin-bottom: 10px;
-    }
-
-    #timer {
-      color: red;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .upi-id {
-      font-size: 16px;
-      color: green;
-      font-weight: bold;
-      margin: 15px 0;
-    }
-
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    button {
-      background: #28a745;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .bottom-text {
-      margin-top: 40px;
-      font-size: 14px;
-    }
-
-    .contact-button {
-      margin-top: 8px;
-      background: #00bfff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .support-icon {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 60px;
-      cursor: pointer;
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UPI Payment Page</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h2>Make UPI Payment</h2>
-    <div id="timer">Time Left: 15:00</div>
+    <div class="timer" id="countdown">Time Left: 15:00</div>
     <img src="https://i.ibb.co/6RjNcdJh/Screenshot-20250719-153539.jpg" alt="QR Code" class="qr" />
-    <div class="upi-id">BHARATPE.8F0E0L7R6Y68168@fbpe</div>
+    <div class="upi-id">UPI ID: <strong>BHARATPE.8F0E0L7R6Y68168@fbpe</strong></div>
 
-    <form id="paymentForm">
-      <input type="text" placeholder="Enter UTR" required />
-      <input type="text" placeholder="Enter Amount" required />
-      <input type="text" placeholder="Enter Username" required />
-      <button type="submit">Verify Payment</button>
-    </form>
+    <div class="payment-icons">
+      <img src="https://i.ibb.co/LD9WTcXs/icons8-google-pay-48.png" alt="GPay" />
+      <img src="https://i.ibb.co/RG175xcz/icons8-phone-pe-48.png" alt="PhonePe" />
+      <img src="https://i.ibb.co/WvY9Y5Z6/fampay-Logo.png" alt="Fampay" />
+      <img src="https://i.ibb.co/NdtXhzPF/icons8-paytm-100.png" alt="Paytm" />
+    </div>
+
+    <input type="text" id="utr" placeholder="Enter UTR" />
+    <input type="text" id="amount" placeholder="Enter Amount" />
+    <input type="text" id="username" placeholder="Enter Username" />
+
+    <button onclick="verifyPayment()">Verify Transaction</button>
   </div>
 
-  <div class="bottom-text" style="text-align:center;">
-    Want to make your payment page?<br>
-    <a href="https://t.me/dllsmm" class="contact-button">Contact</a>
+  <div class="footer">
+    <div>Want to make your payment page?</div>
+    <a href="https://t.me/dllsmm" target="_blank" class="contact-button">Contact</a>
   </div>
 
-  <a href="https://t.me/dllsmm">
+  <a href="https://t.me/dllsmm" target="_blank">
     <img src="https://i.ibb.co/gGZCjFM/help-desk.png" alt="Support" class="support-icon" />
   </a>
 
-  <script>
-    // Countdown timer
-    let minutes = 15;
-    let seconds = 0;
-    const timerDisplay = document.getElementById("timer");
-
-    function updateTimer() {
-      const formattedMinutes = minutes.toString().padStart(2, '0');
-      const formattedSeconds = seconds.toString().padStart(2, '0');
-      timerDisplay.textContent = `Time Left: ${formattedMinutes}:${formattedSeconds}`;
-
-      if (minutes === 0 && seconds === 0) {
-        clearInterval(timerInterval);
-        timerDisplay.textContent = "Time's up!";
-        return;
-      }
-
-      if (seconds === 0) {
-        minutes--;
-        seconds = 59;
-      } else {
-        seconds--;
-      }
-    }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-  </script>
+  <!-- Script files -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
