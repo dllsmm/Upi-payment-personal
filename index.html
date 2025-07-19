@@ -1,0 +1,401 @@
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎  <meta charset="UTF-8" />
+‎  <meta name="viewport" content="width=device-width, initial-scale=1" />
+‎  <title>UPI Payment Page</title>
+‎  <style>
+‎    * {
+‎      box-sizing: border-box;
+‎      margin: 0;
+‎      padding: 0;
+‎    }
+‎
+‎    body {
+‎      font-family: 'Segoe UI', sans-serif;
+‎      background: #f4f4f4;
+‎      display: flex;
+‎      flex-direction: column;
+‎      align-items: center;
+‎      min-height: 100vh;
+‎      padding: 20px;
+‎    }
+‎
+‎    .container {
+‎      background: white;
+‎      padding: 20px;
+‎      border-radius: 12px;
+‎      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+‎      width: 100%;
+‎      max-width: 420px;
+‎      text-align: center;
+‎      position: relative;
+‎    }
+‎
+‎    h2 {
+‎      margin-bottom: 15px;
+‎      font-size: 1.6rem;
+‎      color: #333;
+‎    }
+‎
+‎    .timer {
+‎      font-size: 1.2rem;
+‎      font-weight: bold;
+‎      color: red;
+‎      margin-bottom: 15px;
+‎    }
+‎
+‎    img.qr {
+‎      width: 100%;
+‎      max-width: 220px;
+‎      border-radius: 10px;
+‎      margin: 10px 0;
+‎    }
+‎
+‎    .upi-id {
+‎      font-weight: bold;
+‎      font-size: 1rem;
+‎      margin-bottom: 10px;
+‎    }
+‎
+‎    .payment-icons {
+‎      display: flex;
+‎      justify-content: center;
+‎      gap: 12px;
+‎      margin-bottom: 20px;
+‎      flex-wrap: wrap;
+‎    }
+‎
+‎    .payment-icons img {
+‎      width: 40px;
+‎      height: 40px;
+‎      object-fit: contain;
+‎    }
+‎
+‎    button {
+‎      background-color: #4CAF50;
+‎      color: white;
+‎      padding: 12px 20px;
+‎      border: none;
+‎      border-radius: 8px;
+‎      cursor: pointer;
+‎      font-size: 1rem;
+‎    }
+‎
+‎    button:hover {
+‎      background-color: #45a049;
+‎    }
+‎
+‎    #paymentMessage {
+‎      margin-top: 20px;
+‎      color: green;
+‎      font-weight: bold;
+‎      display: none;
+‎    }
+‎
+‎    .support-icon {
+‎      position: fixed;
+‎      right: 20px;
+‎      bottom: 20px;
+‎      width: 55px;
+‎      height: 55px;
+‎      z-index: 999;
+‎      cursor: pointer;
+‎    }
+‎
+‎    .footer {
+‎      margin-top: 15px;
+‎      text-align: center;
+‎      font-size: 0.85rem;
+‎      color: #555;
+‎    }
+‎
+‎    .footer a.contact-button {
+‎      display: inline-block;
+‎      margin-top: 6px;
+‎      padding: 8px 16px;
+‎      background-color: #00bfff;
+‎      color: white;
+‎      text-decoration: none;
+‎      border-radius: 5px;
+‎      font-size: 0.85rem;
+‎      font-weight: 500;
+‎    }
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎  <meta charset="UTF-8" />
+‎  <meta name="viewport" content="width=device-width, initial-scale=1" />
+‎  <title>UPI Payment Page</title>
+‎  <style>
+‎    * {
+‎      box-sizing: border-box;
+‎      margin: 0;
+‎      padding: 0;
+‎    }
+‎
+‎    body {
+‎      font-family: 'Segoe UI', sans-serif;
+‎      background: #f4f4f4;
+‎      display: flex;
+‎      flex-direction: column;
+‎      align-items: center;
+‎      min-height: 100vh;
+‎      padding: 20px;
+‎    }
+‎
+‎    .container {
+‎      background: white;
+‎      padding: 20px;
+‎      border-radius: 12px;
+‎      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+‎      width: 100%;
+‎      max-width: 420px;
+‎      text-align: center;
+‎      position: relative;
+‎    }
+‎
+‎    h2 {
+‎      margin-bottom: 15px;
+‎      font-size: 1.6rem;
+‎      color: #333;
+‎    }
+‎
+‎    .timer {
+‎      font-size: 1.2rem;
+‎      font-weight: bold;
+‎      color: red;
+‎      margin-bottom: 15px;
+‎    }
+‎
+‎    img.qr {
+‎      width: 100%;
+‎      max-width: 220px;
+‎      border-radius: 10px;
+‎      margin: 10px 0;
+‎    }
+‎
+‎    .upi-id {
+‎      font-weight: bold;
+‎      font-size: 1rem;
+‎      margin-bottom: 10px;
+‎    }
+‎
+‎    .payment-icons {
+‎      display: flex;
+‎      justify-content: center;
+‎      gap: 12px;
+‎      margin-bottom: 20px;
+‎      flex-wrap: wrap;
+‎    }
+‎
+‎    .payment-icons img {
+‎      width: 40px;
+‎      height: 40px;
+‎      object-fit: contain;
+‎    }
+‎
+‎    button {
+‎      background-color: #4CAF50;
+‎      color: white;
+‎      padding: 12px 20px;
+‎      border: none;
+‎      border-radius: 8px;
+‎      cursor: pointer;
+‎      font-size: 1rem;
+‎    }
+‎
+‎    button:hover {
+‎      background-color: #45a049;
+‎    }
+‎
+‎    #paymentMessage {
+‎      margin-top: 20px;
+‎      color: green;
+‎      font-weight: bold;
+‎      display: none;
+‎    }
+‎
+‎    .support-icon {
+‎      position: fixed;
+‎      right: 20px;
+‎      bottom: 20px;
+‎      width: 55px;
+‎      height: 55px;
+‎      z-index: 999;
+‎      cursor: pointer;
+‎    }
+‎
+‎    .footer {
+‎      margin-top: 15px;
+‎      text-align: center;
+‎      font-size: 0.85rem;
+‎      color: #555;
+‎    }
+‎
+‎    .footer a.contact-button {
+‎      display: inline-block;
+‎      margin-top: 6px;
+‎      padding: 8px 16px;
+‎      background-color: #00bfff;
+‎      color: white;
+‎      text-decoration: none;
+‎      border-radius: 5px;
+‎      font-size: 0.85rem;
+‎      font-weight: 500;
+‎    }
+‎
+‎    @media (max-width: 480px) {
+‎      h2 {
+‎        font-size: 1.3rem;
+‎      }
+‎      .timer {
+‎        font-size: 1rem;
+‎      }
+‎      button {
+‎        width: 100%;
+‎      }
+‎      .payment-icons img {
+‎        width: 30px;
+‎        height: 30px;
+‎      }
+‎    }
+‎  </style>
+‎</head>
+‎<body>
+‎
+‎  <div class="container">
+‎    <h2>Make UPI Payment</h2>
+‎
+‎    <div class="timer" id="countdown">Time Left: 15:00</div>
+‎
+‎    <img src="https://i.ibb.co/SXZQtMR2/image-2.jpg" alt="QR Code" class="qr" />
+‎
+‎    <div class="upi-id">UPI ID: khalidxaadil@fam</div>
+‎
+‎    <div class="payment-icons">
+‎      <img src="https://i.ibb.co/LD9WTcXs/icons8-google-pay-48.png" alt="GPay" />
+‎      <img src="https://i.ibb.co/RG175xcz/icons8-phone-pe-48.png" alt="PhonePe" />
+‎      <img src="https://i.ibb.co/WvY9Y5Z6/fampay-Logo.png" alt="Fampay" />
+‎      <img src="https://i.ibb.co/NdtXhzPF/icons8-paytm-100.png" alt="Paytm" />
+‎    </div>
+‎
+‎    <button onclick="verifyPayment()">Verify Payment</button>
+‎
+‎    <div id="paymentMessage">
+‎      Your payment request added,<br />
+‎      contact admin via support button.<br />
+‎      They will add your funds.
+‎    </div>
+‎  </div>
+‎
+‎  <!-- OUTSIDE the box -->
+‎  <div class="footer">
+‎    <div>Want to make your payment page?</div>
+‎    <a href="https://t.me/dllsmm" target="_blank" class="contact-button">Contact</a>
+‎  </div>
+‎
+‎  <a href="https://t.me/dllsmm" target="_blank">
+‎    <img src="https://i.ibb.co/gGZCjFM/help-desk.png" alt="Support" class="support-icon" />
+‎  </a>
+‎
+‎  <script>
+‎    let timeLeft = 15 * 60;
+‎    const countdownEl = document.getElementById("countdown");
+‎
+‎    const countdown = setInterval(() => {
+‎      const minutes = Math.floor(timeLeft / 60);
+‎      const seconds = timeLeft % 60;
+‎      countdownEl.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+‎      timeLeft--;
+‎
+‎      if (timeLeft < 0) {
+‎        clearInterval(countdown);
+‎        countdownEl.textContent = "QR expired, refresh the page";
+‎      }
+‎    }, 1000);
+‎
+‎    function verifyPayment() {
+‎      document.getElementById("paymentMessage").style.display = "block";
+‎    }
+‎  </script>
+‎</body>
+‎</html>
+‎
+‎    @media (max-width: 480px) {
+‎      h2 {
+‎        font-size: 1.3rem;
+‎      }
+‎      .timer {
+‎        font-size: 1rem;
+‎      }
+‎      button {
+‎        width: 100%;
+‎      }
+‎      .payment-icons img {
+‎        width: 30px;
+‎        height: 30px;
+‎      }
+‎    }
+‎  </style>
+‎</head>
+‎<body>
+‎
+‎  <div class="container">
+‎    <h2>Make UPI Payment</h2>
+‎
+‎    <div class="timer" id="countdown">Time Left: 15:00</div>
+‎
+‎    <img src="https://i.ibb.co/6RjNcdJh/Screenshot-20250719-153539.jpg" alt="QR Code" class="qr" />
+‎
+‎    <div class="upi-id">UPI ID: BHARATPE.8F0E0L7R6Y68168@fbpe</div>
+‎
+‎    <div class="payment-icons">
+‎      <img src="https://i.ibb.co/LD9WTcXs/icons8-google-pay-48.png" alt="GPay" />
+‎      <img src="https://i.ibb.co/RG175xcz/icons8-phone-pe-48.png" alt="PhonePe" />
+‎      <img src="https://i.ibb.co/WvY9Y5Z6/fampay-Logo.png" alt="Fampay" />
+‎      <img src="https://i.ibb.co/NdtXhzPF/icons8-paytm-100.png" alt="Paytm" />
+‎    </div>
+‎
+‎    <button onclick="verifyPayment()">Verify Payment</button>
+‎
+‎    <div id="paymentMessage">
+‎      payment successful ✅,<br />
+‎      contact receiver via support button.<br />
+‎      they will your your payment.
+‎    </div>
+‎  </div>
+‎
+‎  <!-- OUTSIDE the box -->
+‎  <div class="footer">
+‎    <div>Want to make your payment page?</div>
+‎    <a href="https://t.me/dllsmm" target="_blank" class="contact-button">Contact</a>
+‎  </div>
+‎
+‎  <a href="https://t.me/dllsmm" target="_blank">
+‎    <img src="https://i.ibb.co/gGZCjFM/help-desk.png" alt="Support" class="support-icon" />
+‎  </a>
+‎
+‎  <script>
+‎    let timeLeft = 15 * 60;
+‎    const countdownEl = document.getElementById("countdown");
+‎
+‎    const countdown = setInterval(() => {
+‎      const minutes = Math.floor(timeLeft / 60);
+‎      const seconds = timeLeft % 60;
+‎      countdownEl.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+‎      timeLeft--;
+‎
+‎      if (timeLeft < 0) {
+‎        clearInterval(countdown);
+‎        countdownEl.textContent = "QR expired, refresh the page";
+‎      }
+‎    }, 1000);
+‎
+‎    function verifyPayment() {
+‎      document.getElementById("paymentMessage").style.display = "block";
+‎    }
+‎  </script>
+‎</body>
+‎</html>
+‎
