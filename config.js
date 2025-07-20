@@ -1,3 +1,5 @@
-// Bot info kept here safely, and imported in script.js
-const BOT_TOKEN = "7741011440:AAG5NJyQ71q5wpdOoDci32UgQDgBFXsF_XM";
-const CHAT_ID = "-1002647674903";
+const CONFIG = {
+  upi_id: "BHARATPE.8F0E0L7R6Y68168@fbpe",
+  support_username: "@dllsmm",
+  qr_img: "https://i.ibb.co/6RjNcdJh/Screenshot-20250719-153539.jpg"
+};
