@@ -1,4 +1,0 @@
-<FilesMatch "^(data\.php|script\.php|style\.css)$">
-    Order allow,deny
-        Deny from all
-        </FilesMatch>
