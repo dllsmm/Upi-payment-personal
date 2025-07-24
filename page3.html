@@ -1,0 +1,73 @@
+<!-- page3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Successful</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #8e9eab, #eef2f3);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+      max-width: 420px;
+      width: 90%;
+    }
+    .checkmark {
+      font-size: 40px;
+      color: green;
+    }
+    .message {
+      font-size: 18px;
+      color: #2f3640;
+      margin-top: 10px;
+    }
+    .time {
+      margin-top: 10px;
+      color: #333;
+      font-size: 14px;
+    }
+    .redirect {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="checkmark">✅</div>
+    <h2>Payment Successful</h2>
+    <div class="message">
+      Money will be added within 30 minutes after your payment is verified.
+    </div>
+    <div class="redirect" id="redirectText">Redirecting in 7 seconds...</div>
+  </div>
+
+  <script>
+    let seconds = 7;
+    const text = document.getElementById("redirectText");
+
+    const countdown = setInterval(() => {
+      seconds--;
+      text.innerText = `Redirecting in ${seconds} seconds...`;
+      if (seconds === 0) {
+        clearInterval(countdown);
+        window.location.href = "https://your-redirect-url.com"; // Replace this
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

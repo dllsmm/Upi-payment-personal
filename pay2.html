@@ -1,0 +1,133 @@
+<!-- pay2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scan & Pay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: sans-serif;
+      background: #f0f0f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+    }
+    .title { font-size: 22px; font-weight: bold; margin-bottom: 20px; }
+    .timer { font-size: 18px; margin: 10px 0; color: #e74c3c; }
+    input, button {
+      padding: 12px;
+      margin: 10px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .qr-code img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="title">Scan QR Code & Pay</div>
+    <div class="qr-code">
+      <img src="your-qr-code.png" alt="QR Code">
+    </div>
+    <div class="timer" id="timer">15:00</div>
+    <p><strong>UPI ID:</strong> example@upi</p>
+
+    <form id="paymentForm">
+      <input type="text" name="utr" placeholder="Enter UTR/Transaction ID" required>
+      <input type="text" name="amount" id="amount" readonly>
+      <input type="text" name="time" id="paymentTime" readonly>
+      <input type="text" name="username" placeholder="Username in SMM Panel" required>
+      <input type="file" name="screenshot" id="screenshot" accept="image/*" required>
+      <button type="submit">Verify Transaction</button>
+    </form>
+    <p id="statusMsg" style="color: green; margin-top: 10px;"></p>
+  </div>
+
+  <script>
+    // Countdown timer
+    let time = 900;
+    const timerDisplay = document.getElementById('timer');
+    setInterval(() => {
+      if (time > 0) {
+        time--;
+        const min = Math.floor(time / 60);
+        const sec = time % 60;
+        timerDisplay.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+      }
+    }, 1000);
+
+    // Pre-fill data
+    document.getElementById("amount").value = localStorage.getItem("amount");
+    document.getElementById("paymentTime").value = new Date().toLocaleString();
+
+    // Telegram Bot Info (replace with your actual values)
+    const BOT_TOKEN = "YOUR_BOT_TOKEN";
+    const CHAT_ID = "YOUR_CHAT_ID";
+
+    // Send data to Telegram
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const utr = form.utr.value;
+      const amount = form.amount.value;
+      const time = form.time.value;
+      const username = form.username.value;
+      const file = document.getElementById("screenshot").files[0];
+
+      const message = `🧾 *New Payment Received*\n\n👤 *Username:* ${username}\n🔹 *UTR:* ${utr}\n💰 *Amount:* ₹${amount}\n⏰ *Time:* ${time}`;
+
+      const formData = new FormData();
+      formData.append("chat_id", CHAT_ID);
+      formData.append("caption", message);
+      formData.append("parse_mode", "Markdown");
+      formData.append("photo", file);
+
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          document.getElementById("statusMsg").textContent = "✅ Payment sent successfully!";
+          setTimeout(() => {
+            window.location.href = "page3.html";
+          }, 1000);
+        } else {
+          alert("❌ Failed to send. Check bot token or chat ID.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("❌ Error sending to Telegram.");
+      });
+    });
+  </script>
+</body>
+</html>
