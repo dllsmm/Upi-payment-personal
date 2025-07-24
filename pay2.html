@@ -1,4 +1,4 @@
-<!-- pay2.html -->
+<!-- pay2.html (Updated with support box and Telegram redirect) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +11,7 @@
       font-family: sans-serif;
       background: #f0f0f5;
       margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      padding-bottom: 100px; /* space for fixed support box */
     }
     .box {
       background: white;
@@ -25,6 +21,7 @@
       text-align: center;
       max-width: 420px;
       width: 90%;
+      margin: 30px auto;
     }
     .title { font-size: 22px; font-weight: bold; margin-bottom: 20px; }
     .timer { font-size: 18px; margin: 10px 0; color: #e74c3c; }
@@ -46,6 +43,49 @@
       max-width: 250px;
       border-radius: 10px;
     }
+
+    /* ✅ Support Box */
+    .support-box {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .support-box p {
+      margin: 0;
+      font-size: 14px;
+    }
+    .support-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .support-actions img {
+      width: 30px;
+      cursor: pointer;
+    }
+    .support-actions button {
+      background: #00aaff;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media(max-width: 420px) {
+      .title { font-size: 20px; }
+      .timer { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -55,7 +95,7 @@
       <img src="https://i.postimg.cc/bwhKQFXm/Screenshot-20250724-124535.jpg" alt="QR Code">
     </div>
     <div class="timer" id="timer">15:00</div>
-    <p><strong>UPI ID:</strong> BHARATPE.8F0E0L7R6Y68168@fbpe</p>
+    <p><strong>UPI ID:</strong>BHARATPE.8F0E0L7R6Y68168@fbpe</p>
 
     <form id="paymentForm">
       <input type="text" name="utr" placeholder="Enter UTR/Transaction ID" required>
@@ -67,7 +107,8 @@
     </form>
     <p id="statusMsg" style="color: green; margin-top: 10px;"></p>
   </div>
-<!-- ✅ Support Box -->
+
+  <!-- ✅ Support Box -->
   <div class="support-box">
     <p>Want to make your payment page?</p>
     <div class="support-actions">
@@ -76,6 +117,7 @@
            onclick="window.location.href='https://t.me/dllsmm'">
     </div>
   </div>
+
   <script>
     // Countdown timer
     let time = 900;
@@ -89,15 +131,12 @@
       }
     }, 1000);
 
-    // Pre-fill data
     document.getElementById("amount").value = localStorage.getItem("amount");
     document.getElementById("paymentTime").value = new Date().toLocaleString();
 
-    // Telegram Bot Info (replace with your actual values)
     const BOT_TOKEN = "7741011440:AAFve9YEC3-xo5ROzNnSdqm9fx_gDoxTKG4";
     const CHAT_ID = "-1002647674903";
 
-    // Send data to Telegram
     document.getElementById("paymentForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
